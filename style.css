@@ -1,0 +1,321 @@
+/* ArtRabs Design */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+    padding: 0;
+
+    background: #0d0d12;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+}
+
+
+
+.app {
+
+    width: 100%;
+
+    max-width: 430px;
+
+    margin: auto;
+
+    padding: 20px;
+
+}
+
+
+
+header {
+
+    text-align: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+
+header h1 {
+
+    color: #FFD700;
+
+    font-size: 36px;
+
+    letter-spacing: 2px;
+
+    text-shadow: 0 0 15px #FFD700;
+
+}
+
+
+
+
+.balance {
+
+    display: flex;
+
+    gap: 12px;
+
+    justify-content: center;
+
+}
+
+
+
+.card {
+
+    width: 50%;
+
+    background: linear-gradient(
+        145deg,
+        #1c1c26,
+        #101014
+    );
+
+
+    border: 1px solid #333;
+
+    border-radius: 18px;
+
+    padding: 18px 10px;
+
+    text-align: center;
+
+    font-size: 16px;
+
+}
+
+
+
+.card span {
+
+    display: block;
+
+    margin-top: 10px;
+
+    font-size: 26px;
+
+    color: #FFD700;
+
+}
+
+
+
+
+
+
+.clicker {
+
+
+    margin-top: 25px;
+
+    background: #171720;
+
+    border-radius: 25px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    border: 1px solid #292938;
+
+}
+
+
+
+
+.worker-image {
+
+
+    font-size: 90px;
+
+    margin-bottom: 10px;
+
+}
+
+
+
+
+.clicker h2 {
+
+    margin: 5px;
+
+    color: #8B5CF6;
+
+}
+
+
+
+
+button {
+
+
+    width: 100%;
+
+
+    border: none;
+
+
+    border-radius: 15px;
+
+
+    padding: 16px;
+
+
+    margin-top: 15px;
+
+
+    background: linear-gradient(
+        135deg,
+        #8B5CF6,
+        #6d28d9
+    );
+
+
+    color: white;
+
+
+    font-size: 17px;
+
+
+    font-weight: bold;
+
+
+    cursor: pointer;
+
+
+}
+
+
+
+button:active {
+
+
+    transform: scale(0.97);
+
+
+}
+
+
+
+
+
+
+
+.bonus {
+
+
+    margin-top: 20px;
+
+
+    background: #171720;
+
+
+    border-radius: 20px;
+
+
+    padding: 20px;
+
+
+    text-align: center;
+
+
+}
+
+
+
+
+.bonus h3 {
+
+
+    color: #FFD700;
+
+
+}
+
+
+
+
+
+.menu {
+
+
+    position: fixed;
+
+
+    bottom: 15px;
+
+
+    left: 50%;
+
+
+    transform: translateX(-50%);
+
+
+    width: 95%;
+
+
+    max-width: 430px;
+
+
+    display: grid;
+
+
+    grid-template-columns: repeat(5,1fr);
+
+
+    gap: 5px;
+
+
+    background: #15151d;
+
+
+    padding: 10px;
+
+
+    border-radius: 20px;
+
+
+}
+
+
+
+
+
+.menu button {
+
+
+    margin: 0;
+
+
+    padding: 10px 5px;
+
+
+    font-size: 11px;
+
+
+    background: #22222d;
+
+
+}
+
+
+
+
+
+.menu button:hover {
+
+
+    background: #8B5CF6;
+
+
+}

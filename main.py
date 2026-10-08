@@ -1,3 +1,13 @@
+import asyncpg
+import os
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+db = None
+
+async def connect_db():
+    global db
+    db = await asyncpg.create_pool(DATABASE_URL)
 import os
 import random
 import time
@@ -317,3 +327,18 @@ async def main():
 if __name__ == "__main__":
 
     asyncio.run(main())
+async def create_tables():
+    async with db.acquire() as conn:
+        await conn.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id BIGINT PRIMARY KEY,
+            username TEXT,
+            stars INTEGER DEFAULT 0,
+            multistars INTEGER DEFAULT 0,
+            referrals INTEGER DEFAULT 0,
+            ref_income INTEGER DEFAULT 0
+        );
+        """)
+        async def on_startup():
+    await connect_db()
+    await create_tables()

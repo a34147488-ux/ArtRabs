@@ -1,3 +1,6 @@
+import os
+
+print("DATABASE:", os.getenv("DATABASE_URL"))
 import asyncpg
 import os
 

@@ -1,44 +1,63 @@
-/* ArtRabs Design */
+/* ArtRabs Design/* ======================
+      ArtRabs Design
+====================== */
+
 
 * {
+
     box-sizing: border-box;
+
 }
 
 
 body {
 
-    margin: 0;
-    padding: 0;
+    margin:0;
 
-    background: #0d0d12;
+    padding:0;
 
-    color: white;
+    background:
+    radial-gradient(
+        circle at top,
+        #222233,
+        #09090d
+    );
 
-    font-family: Arial, sans-serif;
+    color:white;
+
+    font-family:
+    Arial,
+    sans-serif;
 
 }
+
+
 
 
 
 .app {
 
-    width: 100%;
+    max-width:430px;
 
-    max-width: 430px;
+    min-height:100vh;
 
-    margin: auto;
+    margin:auto;
 
-    padding: 20px;
+    padding:20px;
+
+    padding-bottom:100px;
 
 }
 
 
 
+
+
+
+
 header {
 
-    text-align: center;
-
-    margin-bottom: 20px;
+    text-align:center;
 
 }
 
@@ -46,26 +65,38 @@ header {
 
 header h1 {
 
-    color: #FFD700;
 
-    font-size: 36px;
+    color:#FFD700;
 
-    letter-spacing: 2px;
+    font-size:40px;
 
-    text-shadow: 0 0 15px #FFD700;
+    letter-spacing:3px;
+
+    text-shadow:
+    0 0 10px #FFD700;
+
 
 }
 
 
 
 
+
+
+
+
+/* БАЛАНС */
+
+
 .balance {
 
-    display: flex;
 
-    gap: 12px;
+    display:flex;
 
-    justify-content: center;
+    gap:10px;
+
+    margin-top:20px;
+
 
 }
 
@@ -73,85 +104,134 @@ header h1 {
 
 .card {
 
-    width: 50%;
 
-    background: linear-gradient(
+    flex:1;
+
+
+    background:
+    linear-gradient(
         145deg,
-        #1c1c26,
-        #101014
+        #20202c,
+        #121218
     );
 
 
-    border: 1px solid #333;
+    border-radius:20px;
 
-    border-radius: 18px;
 
-    padding: 18px 10px;
+    padding:20px 10px;
 
-    text-align: center;
 
-    font-size: 16px;
+    text-align:center;
+
+
+    border:
+
+    1px solid #333;
+
+
+    font-size:15px;
+
 
 }
+
 
 
 
 .card span {
 
-    display: block;
 
-    margin-top: 10px;
+    display:block;
 
-    font-size: 26px;
 
-    color: #FFD700;
+    margin-top:10px;
+
+
+    font-size:28px;
+
+
+    color:#FFD700;
+
 
 }
 
 
 
 
+
+
+
+
+
+
+/* СТРАНИЦЫ */
+
+
+.page {
+
+
+    display:none;
+
+
+    margin-top:20px;
+
+
+}
+
+
+
+
+
+
+
+
+/* КЛИКЕР */
 
 
 .clicker {
 
 
-    margin-top: 25px;
+    background:#171722;
 
-    background: #171720;
 
-    border-radius: 25px;
+    border-radius:25px;
 
-    padding: 25px;
 
-    text-align: center;
+    padding:25px;
 
-    border: 1px solid #292938;
+
+    text-align:center;
+
+
+    border:
+
+    1px solid #30303d;
+
 
 }
-
 
 
 
 .worker-image {
 
 
-    font-size: 90px;
+    font-size:90px;
 
-    margin-bottom: 10px;
 
 }
+
 
 
 
 
 .clicker h2 {
 
-    margin: 5px;
 
-    color: #8B5CF6;
+    color:#a855f7;
+
 
 }
+
 
 
 
@@ -159,48 +239,48 @@ header h1 {
 button {
 
 
-    width: 100%;
+    width:100%;
 
 
-    border: none;
+    padding:16px;
 
 
-    border-radius: 15px;
+    margin-top:15px;
 
 
-    padding: 16px;
+    border:none;
 
 
-    margin-top: 15px;
+    border-radius:15px;
 
 
-    background: linear-gradient(
+    background:
+
+    linear-gradient(
         135deg,
-        #8B5CF6,
+        #9333ea,
         #6d28d9
     );
 
 
-    color: white;
+    color:white;
 
 
-    font-size: 17px;
+    font-size:16px;
 
 
-    font-weight: bold;
-
-
-    cursor: pointer;
+    font-weight:bold;
 
 
 }
+
 
 
 
 button:active {
 
 
-    transform: scale(0.97);
+    transform:scale(.96);
 
 
 }
@@ -209,24 +289,73 @@ button:active {
 
 
 
+
+
+
+
+
+/* БОНУС */
 
 
 .bonus {
 
 
-    margin-top: 20px;
+    background:#171722;
 
 
-    background: #171720;
+    margin-top:20px;
 
 
-    border-radius: 20px;
+    padding:20px;
 
 
-    padding: 20px;
+    border-radius:20px;
 
 
-    text-align: center;
+    text-align:center;
+
+
+}
+
+
+
+
+
+
+/* РАБОТНИКИ */
+
+
+.worker-card {
+
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #1e1e2a,
+        #111118
+    );
+
+
+    border-radius:20px;
+
+
+    padding:20px;
+
+
+    border:
+
+    1px solid #333;
+
+
+}
+
+
+
+.worker-card h3 {
+
+
+    color:#FFD700;
 
 
 }
@@ -234,55 +363,90 @@ button:active {
 
 
 
-.bonus h3 {
 
 
-    color: #FFD700;
+
+
+/* КАРТОЧКИ РАЗДЕЛОВ */
+
+
+.page {
+
+
+    background:#15151e;
+
+
+    padding:20px;
+
+
+    border-radius:20px;
 
 
 }
 
 
 
+
+.page h2 {
+
+
+    color:#FFD700;
+
+
+}
+
+
+
+
+
+
+
+/* НИЖНЕЕ МЕНЮ */
 
 
 .menu {
 
 
-    position: fixed;
+    position:fixed;
 
 
-    bottom: 15px;
+    bottom:15px;
 
 
-    left: 50%;
+    left:50%;
 
 
-    transform: translateX(-50%);
+    transform:translateX(-50%);
 
 
-    width: 95%;
+    width:95%;
 
 
-    max-width: 430px;
+    max-width:430px;
 
 
-    display: grid;
+    display:grid;
 
 
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns:
+    repeat(5,1fr);
 
 
-    gap: 5px;
+    gap:5px;
 
 
-    background: #15151d;
+    background:#111118;
 
 
-    padding: 10px;
+    padding:10px;
 
 
-    border-radius: 20px;
+    border-radius:25px;
+
+
+    border:
+
+    1px solid #333;
 
 
 }
@@ -294,16 +458,16 @@ button:active {
 .menu button {
 
 
-    margin: 0;
+    background:#22222d;
 
 
-    padding: 10px 5px;
+    padding:12px 5px;
 
 
-    font-size: 11px;
+    font-size:11px;
 
 
-    background: #22222d;
+    margin:0;
 
 
 }
@@ -315,38 +479,52 @@ button:active {
 .menu button:hover {
 
 
-    background: #8B5CF6;
+    background:#9333ea;
 
 
 }
-.page{
-
-display:none;
-
-background:#171720;
-
-border-radius:20px;
-
-padding:20px;
-
-margin-top:20px;
-
-}
 
 
-.worker-card{
 
-background:#22222d;
 
-padding:20px;
 
-border-radius:15px;
+
+
+/* АНИМАЦИИ */
+
+
+@keyframes pulse {
+
+
+0%{
+
+transform:scale(1);
 
 }
 
 
-.page button{
+50%{
 
-margin-top:20px;
+transform:scale(1.05);
 
 }
+
+
+100%{
+
+transform:scale(1);
+
+}
+
+
+}
+
+
+
+.clicker button {
+
+
+    animation:pulse 2s infinite;
+
+
+} */

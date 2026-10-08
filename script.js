@@ -1,144 +1,24 @@
-// ArtRabs Game Logic
+// ArtRabs Game // ======================
+// ArtRabs Game System
+// ======================
 
 
-let multiStars = Number(localStorage.getItem("multiStars")) || 0;
+// Балансы
 
-let stars = Number(localStorage.getItem("stars")) || 0;
+let multiStars =
+Number(localStorage.getItem("multiStars")) || 0;
 
 
+let stars =
+Number(localStorage.getItem("stars")) || 0;
 
-const multiText = document.getElementById("multi");
 
-const starsText = document.getElementById("stars");
 
+// Работник
 
-
-function updateBalance(){
-
-    multiText.innerHTML = multiStars;
-
-    starsText.innerHTML = stars;
-
-
-    localStorage.setItem(
-        "multiStars",
-        multiStars
-    );
-
-
-    localStorage.setItem(
-        "stars",
-        stars
-    );
-
-}
-
-
-
-updateBalance();
-
-
-
-
-// КЛИКЕР
-
-
-document
-.getElementById("clickBtn")
-.onclick = function(){
-
-
-    multiStars += 1;
-
-
-    updateBalance();
-
-
-    showReward("+1 Multi ⭐");
-
-};
-
-
-
-
-// РУЛЕТКА
-
-
-document
-.getElementById("wheelBtn")
-.onclick = function(){
-
-
-    let reward = Math.floor(
-        Math.random() * 6
-    );
-
-
-    stars += reward;
-
-
-    updateBalance();
-
-
-    alert(
-        "🎁 Рулетка\n\nТы получил: "
-        + reward
-        + " ⭐"
-    );
-
-
-};
-
-
-
-
-
-// Анимация награды
-
-
-function showReward(text){
-
-
-    let item = document.createElement("div");
-
-
-    item.innerHTML = text;
-
-
-    item.style.position = "fixed";
-
-    item.style.left = "50%";
-
-    item.style.top = "45%";
-
-    item.style.transform =
-    "translate(-50%,-50%)";
-
-
-    item.style.color =
-    "#FFD700";
-
-
-    item.style.fontSize =
-    "25px";
-
-
-    item.style.fontWeight =
-    "bold";
-
-
-    item.style.zIndex =
-    "999";
-
-
-    document.body.appendChild(item);
-
-
-
-    setTimeout(()=>{
-
-        let workerLevel =
+let workerLevel =
 Number(localStorage.getItem("workerLevel")) || 1;
+
 
 
 let refs =
@@ -146,26 +26,75 @@ Number(localStorage.getItem("refs")) || 0;
 
 
 
-function openPage(page){
-
-document.querySelectorAll(".page")
-.forEach(p=>p.style.display="none");
+let refMoney =
+Number(localStorage.getItem("refMoney")) || 0;
 
 
-document.getElementById(page)
-.style.display="block";
+
+
+// Обновление экрана
+
+function updateBalance(){
+
+
+document.getElementById("multi").innerHTML =
+multiStars;
+
+
+document.getElementById("stars").innerHTML =
+stars;
+
+
+
+document.getElementById("profileMulti").innerHTML =
+multiStars;
+
+
+document.getElementById("profileStars").innerHTML =
+stars;
+
+
+
+document.getElementById("workerLevel").innerHTML =
+workerLevel;
+
+
+
+document.getElementById("workerIncome").innerHTML =
+workerLevel * 40;
+
+
+
+document.getElementById("refsCount").innerHTML =
+refs;
+
+
+
+document.getElementById("refMoney").innerHTML =
+refMoney;
+
+
+save();
 
 }
 
 
 
-function upgradeWorker(){
 
 
-if(workerLevel < 50){
+function save(){
 
 
-workerLevel++;
+localStorage.setItem(
+"multiStars",
+multiStars
+);
+
+
+localStorage.setItem(
+"stars",
+stars
+);
 
 
 localStorage.setItem(
@@ -174,26 +103,214 @@ workerLevel
 );
 
 
-document.getElementById(
-"workerLevel"
-).innerHTML = workerLevel;
+localStorage.setItem(
+"refs",
+refs
+);
 
 
-document.getElementById(
-"workerIncome"
-).innerHTML =
-workerLevel * 40;
+localStorage.setItem(
+"refMoney",
+refMoney
+);
 
 
 }
 
+
+
+
+
+// ======================
+// КЛИКЕР
+// ======================
+
+
+document
+.getElementById("clickBtn")
+.onclick = function(){
+
+
+multiStars += 1;
+
+
+updateBalance();
+
+
+showPopup(
+"+1 Multi ⭐"
+);
+
+
+};
+
+
+
+
+
+
+// ======================
+// РУЛЕТКА
+// ======================
+
+
+document
+.getElementById("wheelBtn")
+.onclick = function(){
+
+
+let reward =
+Math.floor(Math.random()*6);
+
+
+
+stars += reward;
+
+
+
+updateBalance();
+
+
+
+alert(
+"🎁 Рулетка\n\nТы получил:\n⭐ "
++
+reward
+);
+
+
+
+};
+
+
+
+
+
+
+
+// ======================
+// СТРАНИЦЫ
+// ======================
+
+
+function openPage(page){
+
+
+let pages =
+document.querySelectorAll(".page");
+
+
+
+pages.forEach(function(item){
+
+
+item.style.display="none";
+
+
+});
+
+
+
+document.getElementById(page)
+.style.display="block";
+
+
+
 }
 
 
 
+
+
+
+
+
+// ======================
+// ПРОКАЧКА РАБОТНИКА
+// ======================
+
+
+function upgradeWorker(){
+
+
+
+if(workerLevel >= 50){
+
+
+alert(
+"Максимальный уровень!"
+);
+
+
+return;
+
+
+}
+
+
+
+let price =
+workerLevel * 500;
+
+
+
+if(multiStars < price){
+
+
+alert(
+"Нужно "
++
+price
++
+" Multi Stars"
+);
+
+
+
+return;
+
+
+}
+
+
+
+
+multiStars -= price;
+
+
+
+workerLevel++;
+
+
+
+updateBalance();
+
+
+
+alert(
+"Работник улучшен!\nУровень: "
++
+workerLevel
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+// ======================
+// РЕФЕРАЛЫ
+// ======================
 
 
 function invite(){
+
 
 
 let link =
@@ -206,66 +323,226 @@ Date.now();
 
 
 alert(
-"Твоя ссылка:\n\n"
+"Твоя ссылка ArtRabs:\n\n"
 +
 link
++
+"\n\nЗа приглашение:\n+500 Multi Stars"
 );
+
 
 
 }
 
 
 
+
+
+
+
+
+// ======================
+// ОБМЕН
+// ======================
 
 
 function exchange(){
 
 
-if(multiStars >= 1000){
+
+if(multiStars < 1000){
 
 
-let getStars =
-Math.floor(
-multiStars / 4000
+alert(
+"Минимальный обмен: 1000 Multi Stars"
 );
 
 
-stars += getStars;
+
+return;
+
+
+}
+
+
+
+let result =
+Math.floor(multiStars / 4000);
+
+
+
+stars += result;
+
 
 
 multiStars = 0;
 
 
+
 updateBalance();
+
 
 
 alert(
 "Обмен выполнен!\nПолучено ⭐ "
 +
-getStars
+result
 );
+
 
 
 }
 
-else{
+
+
+
+
+
+
+
+
+// ======================
+// КЕЙСЫ
+// ======================
+
+
+function openCase(){
+
+
+
+let price = 500;
+
+
+
+if(multiStars < price){
 
 
 alert(
-"Нужно минимум 1000 Multi Stars"
+"Нужно 500 Multi Stars"
 );
 
 
-}
 
-}
-
-
-
-
-
-openPage("home");
-    },800);
+return;
 
 
 }
+
+
+
+multiStars -= price;
+
+
+
+let result =
+[
+-1000,
+0,
+500,
+1000,
+2000,
+3500
+]
+[
+Math.floor(
+Math.random()*6
+)
+];
+
+
+
+multiStars += result;
+
+
+
+updateBalance();
+
+
+
+alert(
+"📦 Кейс открыт!\n\nРезультат:\n"
++
+result
++
+" Multi Stars"
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+// ======================
+// АНИМАЦИЯ
+// ======================
+
+
+function showPopup(text){
+
+
+
+let popup =
+document.createElement("div");
+
+
+
+popup.innerHTML=text;
+
+
+
+popup.style.position="fixed";
+
+popup.style.left="50%";
+
+popup.style.top="40%";
+
+popup.style.transform=
+"translate(-50%,-50%)";
+
+popup.style.color="#FFD700";
+
+popup.style.fontSize="30px";
+
+popup.style.fontWeight="bold";
+
+popup.style.zIndex="999";
+
+
+
+document.body.appendChild(popup);
+
+
+
+setTimeout(()=>{
+
+
+popup.remove();
+
+
+},800);
+
+
+
+}
+
+
+
+
+
+
+
+// Запуск
+
+
+updateBalance();
+
+
+openPage("home");Logic
+
+

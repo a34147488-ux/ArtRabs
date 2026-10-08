@@ -319,3 +319,34 @@ button:active {
 
 
 }
+.page{
+
+display:none;
+
+background:#171720;
+
+border-radius:20px;
+
+padding:20px;
+
+margin-top:20px;
+
+}
+
+
+.worker-card{
+
+background:#22222d;
+
+padding:20px;
+
+border-radius:15px;
+
+}
+
+
+.page button{
+
+margin-top:20px;
+
+}

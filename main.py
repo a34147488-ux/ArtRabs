@@ -1,37 +1,37 @@
 import os
+import random
+import time
 import asyncio
 
 from aiogram import Bot, Dispatcher
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton
-from aiogram.filters import Command, CommandStart
+from aiogram.filters import CommandStart
 
 
 TOKEN = os.getenv("BOT_TOKEN")
-
-if not TOKEN:
-    raise ValueError("BOT_TOKEN не найден в Railway Variables")
-
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
 
+users = {}
+
+
 menu = ReplyKeyboardMarkup(
     keyboard=[
         [
-            KeyboardButton(text="⭐ Баланс"),
-            KeyboardButton(text="👷 Работники")
-        ],
-        [
-            KeyboardButton(text="🎁 Рулетка"),
-            KeyboardButton(text="📦 Кейсы")
+            KeyboardButton(text="👷 Работники"),
+            KeyboardButton(text="🎁 Рулетка")
         ],
         [
             KeyboardButton(text="💱 Обмен"),
-            KeyboardButton(text="🏆 Топы")
+            KeyboardButton(text="📦 Кейсы")
         ],
         [
-            KeyboardButton(text="👤 Профиль"),
+            KeyboardButton(text="🏆 Топы"),
+            KeyboardButton(text="👤 Профиль")
+        ],
+        [
             KeyboardButton(text="👥 Пригласить")
         ]
     ],
@@ -39,140 +39,70 @@ menu = ReplyKeyboardMarkup(
 )
 
 
+images = {
+
+"workers":
+"https://i.imgur.com/example_workers.jpg",
+
+"exchange":
+"https://i.imgur.com/example_exchange.jpg",
+
+"roulette":
+"https://i.imgur.com/example_roulette.jpg",
+
+"cases":
+"https://i.imgur.com/example_cases.jpg",
+
+"profile":
+"https://i.imgur.com/example_profile.jpg",
+
+"tops":
+"https://i.imgur.com/example_tops.jpg"
+
+}
+
+
+
 @dp.message(CommandStart())
 async def start(message: Message):
 
-    args = message.text.split()
+    user_id = message.from_user.id
 
-    if len(args) > 1:
-        ref = args[1]
 
-        await message.answer(
-            f"""
-⭐ Добро пожаловать в АртRabs!
+    if user_id not in users:
 
-Ты пришёл по приглашению пользователя:
-{ref}
+        users[user_id] = {
 
-Твой аккаунт создан.
-"""
-        )
+            "stars":0,
+            "multi":0,
+            "workers":0,
+            "last_spin":0
 
-    else:
-        await message.answer(
-            """
-⭐ Добро пожаловать в АртRabs!
+        }
 
-Экономическая система работников.
-
-Развивай команду,
-получай Multi Stars,
-участвуй в активностях.
-"""
-        )
 
     await message.answer(
-        "Главное меню:",
+        """
+⭐ Добро пожаловать в ArtRabs!
+
+
+Развивай работников,
+получай Multi Stars,
+участвуй в событиях.
+""",
         reply_markup=menu
     )
 
 
+
 @dp.message()
-async def buttons(message: Message):
+async def handler(message: Message):
 
-    text = message.text
-
-
-    if text == "⭐ Баланс":
-
-        await message.answer(
-            """
-⭐ Твой баланс:
-
-⭐ Stars: 0
-
-✨ Multi Stars: 0
-"""
-        )
+    user = users[message.from_user.id]
 
 
-    elif text == "👷 Работники":
+    if message.text == "👥 Пригласить":
 
-        await message.answer(
-            """
-👷 Работники АртRabs
-
-
-Всего работников:
-0
-
-
-Доход:
-0 ✨ Multi Stars / неделю
-"""
-        )
-
-
-    elif text == "🎁 Рулетка":
-
-        await message.answer(
-            """
-🎁 Ежедневная рулетка
-
-
-Награды:
-
-⭐ 0-5 Stars
-
-
-Доступна 1 раз в сутки.
-"""
-        )
-
-
-    elif text == "📦 Кейсы":
-
-        await message.answer(
-            """
-📦 Кейсы АртRabs
-
-
-Покупка за Multi Stars
-
-
-Возможные результаты:
-
-✨ +3500
-✨ +2000
-✨ +500
-0
-❌ -1000
-"""
-        )
-
-
-    elif text == "💱 Обмен":
-
-        await message.answer(
-            """
-💱 Обмен валюты
-
-
-Курс:
-
-
-1000 ✨ Multi Stars
-=
-0.25 ⭐ Stars
-
-
-Минимальный обмен:
-1000 Multi Stars
-"""
-        )
-
-
-    elif text == "👥 Пригласить":
 
         info = await bot.get_me()
 
@@ -184,57 +114,193 @@ async def buttons(message: Message):
 
         await message.answer(
             f"""
-👥 Работники АртRabs
+👷 Работники ArtRabs
 
 
 Твоя ссылка:
-
 
 {link}
 
 
 За каждого приглашённого:
+
 ✨ +500 Multi Stars
-
-
-Приглашай людей и развивай свою команду.
 """
         )
 
 
-    elif text == "🏆 Топы":
+
+    elif message.text == "🎁 Рулетка":
+
+
+        now = time.time()
+
+
+        if now - user["last_spin"] < 86400:
+
+            await message.answer(
+                "⏳ Рулетка доступна раз в сутки."
+            )
+
+            return
+
+
+
+        prize = random.randint(0,5)
+
+        user["stars"] += prize
+
+        user["last_spin"] = now
+
 
         await message.answer(
-            """
-🏆 Топы АртRabs
+            f"""
+🎁 Ежедневная рулетка
 
 
-👷 Топ работников
+Выпало:
 
-💰 Топ балансов
-
-✨ Топ заработка
-"""
-        )
-
-
-    elif text == "👤 Профиль":
-
-        await message.answer(
-            """
-👤 Профиль
-
-
-Уровень:
-1
-
-
-Работников:
-0
+⭐ {prize} Stars
 
 
 Баланс:
-0
+⭐ {user["stars"]}
+"""
+        )
+
+
+
+    elif message.text == "💱 Обмен":
+
+
+        amount = user["multi"]
+
+
+        if amount < 1000:
+
+            await message.answer(
+                """
+💱 Обмен
+
+
+Минимум:
+1000 Multi Stars
+
+
+Твой баланс:
+
+✨ {amount}
+"""
+            )
+
+        else:
+
+            stars = amount // 4000
+
+            user["stars"] += stars
+
+            user["multi"] = 0
+
+
+            await message.answer(
+                f"""
+✅ Обмен выполнен
+
+
+Получено:
+
+⭐ {stars} Stars
+"""
+            )
+
+
+
+    elif message.text == "👷 Работники":
+
+
+        await message.answer(
+            f"""
+👷 Работники ArtRabs
+
+
+Количество:
+
+{user["workers"]}
+
+
+Доход:
+
+0 Multi Stars / неделю
+"""
+        )
+
+
+
+    elif message.text == "👤 Профиль":
+
+
+        await message.answer(
+            f"""
+👤 Профиль
+
+
+⭐ Stars:
+{user["stars"]}
+
+
+✨ Multi Stars:
+{user["multi"]}
+
+
+👷 Работники:
+{user["workers"]}
+"""
+        )
+
+
+
+    elif message.text == "📦 Кейсы":
+
+
+        win = random.choice(
+            [
+                3500,
+                2000,
+                500,
+                0,
+                -1000
+            ]
+        )
+
+
+        user["multi"] += win
+
+
+        await message.answer(
+            f"""
+📦 Кейс открыт
+
+
+Результат:
+
+✨ {win} Multi Stars
+"""
+        )
+
+
+
+    elif message.text == "🏆 Топы":
+
+        await message.answer(
+            """
+🏆 Топы ArtRabs
+
+
+👷 Лучшие работники
+
+💰 Лучшие балансы
+
+✨ Лучшие заработки
 """
         )
 
@@ -249,4 +315,5 @@ async def main():
 
 
 if __name__ == "__main__":
+
     asyncio.run(main())
